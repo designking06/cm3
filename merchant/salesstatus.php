@@ -66,4 +66,4 @@ if(isset($_GET['compID'])){
           </div>
         </div>
 
-<?php getMtFooter();?>
+<?php getFooter("merchant");?>

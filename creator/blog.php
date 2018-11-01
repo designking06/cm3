@@ -97,4 +97,4 @@ $count = $select->rowCount();
   </div>
 </div>
 </div>
-<?php getCrFooter();?>
+<?php getFooter("creator");?>

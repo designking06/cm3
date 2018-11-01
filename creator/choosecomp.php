@@ -27,5 +27,5 @@ require_once('../require.php');
       </header>
             <?php getusercompany($pdo,$uid);?>
     </div>
-    <?php getCrFooter();?>
+    <?php getFooter("creator");?>
 </div>

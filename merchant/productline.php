@@ -131,4 +131,4 @@ if(isset($_GET['viewAll'])){
 </div></div>
     <?php } ?>
 </div>
-<?php getFooter();?>
+<?php getFooter("merchant");?>

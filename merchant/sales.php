@@ -122,7 +122,7 @@ if(isset($_POST['neworder'])){
                 <th scope="col" class="">Date</th>
                 <th scope="col" class="">Action</th>
               </tr>
-              <!-- Sales function, order by email & date -->                
+              <!-- Sales function, order by email & date -->
                 <?php retrievesales($pdo,$_SESSION['compID']);?>
               </table>
             </div>
@@ -190,4 +190,4 @@ if(isset($_POST['neworder'])){
                     <input type="hidden" name="compID" value="<?php echo $_SESSION['compID'];?>">
                     <input type="submit" name="neworder" value="Submit Sale" class="form-control w3-green">
                 </form>
-<?php getMtFooter();?>
+<?php getFooter("merchant");?>

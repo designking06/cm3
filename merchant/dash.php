@@ -105,4 +105,4 @@ if(isset($_POST['submitTask'])){
     <div class="col-sm-12 text-center"><a href="../index.php"><h1>VIEW WEBSITE</h1></a></div>
   </div>
     </div>
-<?php getMtFooter(); ?>
+<?php getFooter("merchant"); ?>

@@ -90,5 +90,5 @@ if(isset($_POST['submit'])){
 </div>
 </div>
 </body>
-<?php getFooter();?>
+<?php getFooter("creator");?>
 </html>

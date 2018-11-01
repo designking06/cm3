@@ -131,4 +131,4 @@ if(!isset($_GET['alert'])){
   <hr>
   <!-- Give user option to go to a page to view all products in a table format -->
   <!-- End Content -->
-  <?php getMtFooter();?>
+  <?php getFooter("merchant");?>

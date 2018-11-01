@@ -171,7 +171,7 @@ if(isset($_POST['album'])){
         </div>
       </div>
     </div>
-  <?php getCrFooter();?>
+  <?php getFooter("creator");?>
   <script>
     $(document).ready(function(){
         $("#sAlbum").click(function(){

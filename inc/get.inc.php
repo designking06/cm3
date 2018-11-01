@@ -127,6 +127,104 @@ function getMtFooter() {
   </footer>
   <?php
 }
+
+function getFooter($cd){
+  ?>
+  <div class="nav">
+      <div id="userMenu" class="w3-modal container w3-black" style="display:none;">
+        <div class="w3-modal-content w3-black w3-padding">
+          <div class="row">
+            <div class="col-sm-6" onclick="document.getElementById('userMenu').style.display='none'" class="row"> X </div>
+            <div class="w3-btn col-sm-6" onclick="javascript:window.location.href='../inc/logout.php'" class="row text-right"> Logout </div>
+          </div>
+          <div class="row w3-text-white">
+              <div class="col-sm-12"><h1 onclick="javascript:window.location.href='settings.php'">Settings</h1></div>
+              <div class="col-sm-12"><div onclick="javascript:window.location.href='../choosecomp.php'"><h1>Change Company</h1></div></div>
+              <div class="col-sm-12"><h1 onclick="javascript:window.location.href='concerns.php'">Report a Concern</h1></div>
+              <?php
+              if(isset($_SESSION['admin'])){
+              if($_SESSION['admin'] == true){
+              ?><h1 onclick="javascript:window.location.href='administer.php'">Admin</h1>
+              <?php
+              }
+              }?>
+          </div>
+            <div id="changePwd" class="container w3-red" style="display:none">
+                <button class="w3-btn w3-yellow" onclick="document.getElementById('changePwd').style.display='none'">X</button>
+              </div>
+        </div>
+      </div>
+      <div id="siteMenu" class="w3-modal container w3-black" style="display:none;">
+      <?php
+        switch($cd){
+          case "merchant":{
+            ?>
+            <div class="w3-modal-content w3-black w3-padding">
+              <div onclick="document.getElementById('siteMenu').style.display='none'" class="row"> X </div>
+              <div class="row w3-text-white">
+                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href='dash.php?compID=<?php echo $_SESSION['compID'];?>'">Dash</h1></div>
+                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href='products.php?compID=<?php echo $_SESSION['compID'];?>'">Products</h1></div>
+                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href=''">Statistics</h1></div>
+                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href=''">CM3: Creator Suite</h1></div>
+              </div>
+              <div id="changePwd" class="container w3-red" style="display:none">
+                <button class="w3-btn w3-yellow" onclick="document.getElementById('changePwd').style.display='none'">X</button>
+              </div>
+            </div>
+            <?php
+            break;
+          }
+          case "creator":{
+            ?>
+              <div class="w3-modal-content w3-black w3-padding">
+                <div onclick="document.getElementById('siteMenu').style.display='none'" class="row"> X </div>
+                <div class="row w3-text-white">
+                    <div class="col-sm-12"><h1 onclick="javascript:window.location.href='dash.php'">Dash</h1></div>
+                    <div class="col-sm-12"><h1 onclick="javascript:window.location.href='create.photo.php'">Photos</h1></div>
+                    <div class="col-sm-12"><h1 onclick="javascript:window.location.href='blog.php'">Blog</h1></div>
+                    <div class="col-sm-12"><h1 onclick="javascript:window.location.href='create.music.php'">Music</h1></div>
+                </div>
+                <div id="changePwd" class="container w3-red" style="display:none">
+                  <button class="w3-btn w3-yellow" onclick="document.getElementById('changePwd').style.display='none'">X</button>
+                </div>
+              </div>
+            <?php
+            break;
+          }
+        }
+      ?>
+    </div>
+    </div>
+    <footer class="w3-black">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Manage:</h3>
+              <ul style="list-style:none">
+                <a href="choosecomp.php"><li>Change Company</li></a>
+                <a href="settings.php"><li>Settings</li></a>
+              </ul>
+          </div>
+          <div class="col-sm-4">
+            <h3>Go To:</h3>
+              <ul style="list-style:none">
+                <a href="admin.php#tasks"><li>Tasks</li></a>
+                <a href="concerns.php"><li>Submit QCC</li></a>
+              </ul>
+          </div>
+          <div class="col-sm-4">
+            <h3>Contact:</h3>
+              <ul style="list-style:none">
+                <a href="concerns.php"><li>Submit QC</li></a>
+              </ul>
+          </div>
+        </div>
+      </div>
+  </footer>
+<?php
+}
+?>
+<?php
 function getCrFooter() {
   ?>
   </div>

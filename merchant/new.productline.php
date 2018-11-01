@@ -30,4 +30,4 @@ if(!isset($_GET['alert'])){
               </div>
             </div>
         </div>
-  <?php getFooter();?>
+  <?php getFooter("merchant");?>

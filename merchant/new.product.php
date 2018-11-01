@@ -111,4 +111,4 @@ if(isset($_POST['newProduct'])){
  <div class="col-sm-4"></div>
   </div>
   <!-- End Content -->
-  <?php getMtFooter();?>
+  <?php getFooter("merchant");?>

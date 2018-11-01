@@ -218,7 +218,7 @@ if(isset($_POST['registerPendingSub_depr'])){
     </div>
 </div><br>
 
-<?php getCrFooter();?>
+<?php getFooter("creator");?>
 <?php } ?>
 <?php
 function getPendin(PDO $pdo){

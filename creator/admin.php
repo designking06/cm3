@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require 'inc/db.inc.php';
 require 'inc/var.inc.php';
@@ -79,8 +79,3 @@ $output = "Website button error";
 <div class="col-sm-12 text-center"><a href="http://<?php echo $CompSite;?>"><h1>VIEW WEBSITE</h1></a></div></div>
 </div>
 </body> 
-<?php
-
-
-
-?>

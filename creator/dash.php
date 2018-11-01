@@ -168,4 +168,4 @@ if(isset($_POST['submitTask'])){
 </div>
 <!--modals-->
 </body>
-<?php getCrFooter(); ?>
+<?php getFooter("creator"); ?>
