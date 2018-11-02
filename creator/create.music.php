@@ -74,7 +74,7 @@ if(isset($_POST['album'])){
 }
 ?>
 <div class="container-fluid">
-<?php getHeader();?>
+<?php getHeader("creator");?>
 <!-- CONTENT -->
       <div id="header" class="row">
         <div class="col-sm-12 text-left">

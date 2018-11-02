@@ -39,7 +39,7 @@ if(isset($_POST['submitTask'])){
 #music{
   background-image: url(https:/cagency.net/media/images/music.jpg);
   background-position: right;
-  background-color:red;
+  background-color:blue;
 }
 #blog{
   background-image: url(https://cagency.net/media/images/blog.jpg);
@@ -51,7 +51,7 @@ if(isset($_POST['submitTask'])){
 <body onload="" class="">
 <div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
   <!-- Navbar -->
-  <?php getHeader(); ?>
+  <?php getHeader("creator"); ?>
   <!-- Navbar on small screens -->
   <!-- End Navbars -->
   <!-- Start Page Content -->
@@ -123,13 +123,18 @@ if(isset($_POST['submitTask'])){
             <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">PROJECT MANAGEMENT</h1>
           </div></a>
           <hr class="w3-clear">
-        <a href="create.music.php?compID=<?php echo $_SESSION['compID'];?>"><div id="music" class=" w3-display-container w3-sepia w3-grayscale" style="width:100%;height:280px;">
-          <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">MEDIA</h1>
+        <a href="create.music.php"><div id="music" class=" w3-display-container w3-grayscale" style="width:100%;height:280px;">
+          <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">MUSIC</h1>
         </div></a>
         <hr class="w3-clear">
-        <a href="blog.php?compID=<?php echo $_SESSION['compID'];?>"><div id="blog" class="w3-display-container w3-grayscale" style="width:100%;height:280px;">
+        <a href="blog.php"><div id="blog" class="w3-display-container w3-grayscale" style="width:100%;height:280px;">
           <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">BLOGS</h1>
         </div></a>
+        <hr class="w3-clear">
+        <a href="media.php?"><div id="blog" class="w3-display-container w3-grayscale" style="width:100%;height:280px;">
+          <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">VIDEOS</h1>
+        </div></a>
+        <hr class="w3-clear">
         <a href="../settings.php?compID=<?php echo $_SESSION['compID'];?>"><div id="" class="w3-display-container" style="width:100%;height:280px;background-color:red;">
           <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">SETTINGS</h1>
         </div></a>
@@ -159,13 +164,6 @@ if(isset($_POST['submitTask'])){
 </div>
 </div>
 <!--modals-->
-<div id="mediaMenu" class="container" >
-  <div class="row"><div class="col-sm-12 text-right"><span class="w3-hover-red w3-padding" style="width:20px;">X</span></div></div>
-  <div class="row w3-margin">
-    <div class="col-sm-6 w3-padding btn btn-primary ">music</div>
-    <div class="col-sm-6 w3-padding btn btn-primary ">blogs</div>
-  </div>
-</div>
 <!--modals-->
 </body>
 <?php getFooter("creator"); ?>

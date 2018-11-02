@@ -1,6 +1,6 @@
 <?php
 require_once('../require.php');
-getHeader();
+getHeader("creator");
 ?>
 <?php
 if(isset($_POST['updateBlog'])){

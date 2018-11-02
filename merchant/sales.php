@@ -72,7 +72,7 @@ if(isset($_POST['neworder'])){
 <!--Retrieve Head info -->
 <div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
   <!-- Navbar -->
-  <?php getHeader(); ?>
+  <?php getHeader("merchant"); ?>
   <!-- Navbar on small screens -->
   <!-- End Navbars -->
   <!-- Start Page Content -->
@@ -97,12 +97,12 @@ if(isset($_POST['neworder'])){
                 <table class="table">
                   <tr class="thead-dark">
                     <th scope="col" colspan="2" class="w3-border-right">Name</th>
-                    <th scope="col" colspan="1"></th>
                   </tr>
                   <tr class="thead-dark">
                     <th scope="col">First</th>
                     <th scope="col" class="w3-border-right">Last</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Action</th>
                   </tr>
                 <?php getcustomers($pdo,$_SESSION['compID']);?>
               </table>
@@ -130,7 +130,7 @@ if(isset($_POST['neworder'])){
     </div>
         <?php //echo $groupMember_Insert_Error; ?>
         <div class="container w3-white w3-card w3-padding">
-              <button id="controller" class="btn w3-margin">
+              <button id="" class="btn w3-margin">
                 <h2 class="w3-text-blue">New Sale</h2>
                 <p>Touch To Start</p>
               </button>
@@ -159,19 +159,13 @@ if(isset($_POST['neworder'])){
                   }
                 ?>
           </div>
-          <form id="panel" method="post">
+          <form id="" method="post">
                   <div class="w3-padding">
                     <h3>1. Customer</h3>
-                    <div class="w3-margin">
-                      <div class="w3-padding">
-                        <button id="toggler" class="btn w3-green"><p class="">Enter Customer Email</p></button>
-                        <div id="slider" class="w3-light-grey">
-                          <input type="email" name="custemail" class="form-control" placeholder="New Customer's Email" value="" required>
-                        </div>
-                      </div>
-                    </div>
+                        <h4>Enter Customer Email</h4>
+                        <input type="email" name="custemail" class="form-control" placeholder="Customer's Email" value="" required>
                   </div>
-                         <hr>
+                  <div class="w3-padding">
                     <h3>2. What Was Purchased?</h3>
                     <p>Check Products From List & Specify Quantity Sold</p>
                     <div class="dropdown">
@@ -189,5 +183,6 @@ if(isset($_POST['neworder'])){
                     <input type="hidden" name="date" value="<?php echo date('Y-m-d');?>">
                     <input type="hidden" name="compID" value="<?php echo $_SESSION['compID'];?>">
                     <input type="submit" name="neworder" value="Submit Sale" class="form-control w3-green">
-                </form>
+                  </div>
+                </form><hr>
 <?php getFooter("merchant");?>

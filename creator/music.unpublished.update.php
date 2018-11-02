@@ -3,7 +3,7 @@
 $output = NULL;
 getHead();
 ?>
-<?php getHeader();?>
+<?php getHeader("creator");?>
 <?php
 if(isset($_POST['updateDescription'])){
     $description = $_POST['description'];

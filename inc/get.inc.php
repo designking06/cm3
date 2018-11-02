@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['compID'])){
+  $compID = "";
+}else{
+  $compID = $_SESSION['compID'];
+}
 function getHead(){
   ?>
   <head>
@@ -21,24 +26,87 @@ function getHead(){
     <?php
     }?>
     <?php
-function getHeader(){
+function getHeader($cd){
+  global $compID;
+  ?>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">CM3</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="dash.php?compID=<?php echo $compID;?>">Dashboard <span class="sr-only">(current)</span></a><!-- current directory dashboard-->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a><!-- Bring back to creator/merchant option -->
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Navigate
+          </a>
+          <div class="dropdown-menu w3-padding" aria-labelledby="navbarDropdownMenuLink">
+                <!-- Switch statement for menu -->
+                <?php
+                switch($cd){
+                  case "home":{?>
+                    <p onclick="javascript:window.location.href='choosecomp.php'">Change Company</p>
+                    <p onclick="javascript:window.location.href='settings.php'">Settings</p>
+                    <hr>
+                    <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
+                    <?php
+                    break;}
+                  case "merchant":{
+                    ?>
+                    <p onclick="javascript:window.location.href='dash.php?compID=<?php echo $compID;?>'">Dash</p>
+                    <p onclick="javascript:window.location.href='products.php?compID=<?php echo $compID;?>'">Products</p>
+                    <p onclick="javascript:window.location.href='sales.php'">Sales/Expenses</p>
+                    <p onclick="javascript:window.location.href='https://stripe.dashboard.com'">Stats</p>
+                    <hr>
+                    <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
+                    <?php
+                    break;}
+                  case "creator" :{
+                    ?>
+                    <p onclick="javascript:window.location.href='dash.php?compID=<?php echo $compID;?>'">Dash</p>
+                    <p onclick="javascript:window.location.href='create.photo.php'">Photos</p>
+                    <p onclick="javascript:window.location.href='blog.php'">Blog</p>
+                    <p onclick="javascript:window.location.href='create.music.php'">Music</p>
+                    <hr>
+                    <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
+                    <?php
+                    break;}
+                } ?>
+            </div>
+          </div>
+        </li>
+      </ul>
+  </nav>
+
+  <?php
+}
+function getHeader2(){
   ?>
   <div class="container-fluid">
   <div id="header">
-      <div class="w3-black"><div class="text-center">
-          <?php
-        if(isset($_SESSION['compID']))
-          { ?>
-          <a class="" href="dash.php?compID=<?php echo $_SESSION['compID'];?>">
-              <?php }else{ ?>
-          <a href="dash.php">
-        <?php } ?>
-        <h2>
-          <span class="">C</span>
-          <span class="">M</span>
-          <span class="">3</span>
-        </h2>
-      </a></div>
+      <div class="w3-black">
+        <div class="text-center">
+            <?php
+          if(isset($compID))
+            { ?>
+            <a class="" href="dash.php?compID=<?php echo $compID;?>">
+                <?php }else{ ?>
+            <a href="dash.php">
+          <?php } ?>
+          <h2>
+            <span class="">C</span>
+            <span class="">M</span>
+            <span class="">3</span>
+          </h2>
+          <p class="w3-small w3-text-green">Assisted Management</p>
+        </a>
+      </div>
         <ul class="nav justify-content-center w3-black w3-padding">
           <li class="nav-item">
             <a class="nav-link active" onclick="document.getElementById('userMenu').style.display='block'">
@@ -56,8 +124,44 @@ function getHeader(){
   </div>
   <div class="" style="min-height:80%;">
 <?php }
+function getFooter(){
+  ?>
+    <footer class="w3-padding">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-12 text-center"><h4>CM3</h4><p>Assisted Management</p><hr class="w3-clear"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Manage:</h3>
+            <div class="row">
+                <div class="col-sm-12"><a href="choosecomp.php">Change Company</a></div>
+                <div class="col-sm-12"><a href="settings.php">Settings</a></div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+            <h3>Go To:</h3>
+            <div class="row">
+                <div class="col-sm-12"><a href="admin.php#tasks">Tasks</a></div>
+                <div class="col-sm-12"><a href="concerns.php">Submit QCC</a></div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+            <h3>Contact:</h3>
+            <div class="row">
+                <div class="col-sm-12"><a href="concerns.php">Submit QCC</a></div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <?php
+  }
 //Sticky Navigation
-function getFooter($cd){
+function getFooter2(){
   ?>
   <div class="nav">
       <div id="userMenu" class="w3-modal container w3-black" style="display:none;">
@@ -91,8 +195,8 @@ function getFooter($cd){
             <div class="w3-modal-content w3-black w3-padding">
               <div onclick="document.getElementById('siteMenu').style.display='none'" class="row"> X </div>
               <div class="row w3-text-white">
-                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href='dash.php?compID=<?php echo $_SESSION['compID'];?>'">Dash</h1></div>
-                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href='products.php?compID=<?php echo $_SESSION['compID'];?>'">Products</h1></div>
+                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href='dash.php?compID=<?php echo $compID;?>'">Dash</h1></div>
+                  <div class="col-sm-12"><h1 onclick="javascript:window.location.href='products.php?compID=<?php echo $compID;?>'">Products</h1></div>
                   <div class="col-sm-12"><h1 onclick="javascript:window.location.href=''">Statistics</h1></div>
                   <div class="col-sm-12"><h1 onclick="javascript:window.location.href=''">CM3: Creator Suite</h1></div>
               </div>
@@ -150,6 +254,9 @@ function getFooter($cd){
         </div>
       </div>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <?php
   }
 ?>

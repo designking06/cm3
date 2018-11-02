@@ -60,9 +60,11 @@ if(isset($_POST['newProduct'])){
 }
 }
 ?>
-  <?php getHeader(); ?>
+  <?php getHeader("merchant"); ?>
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
+    <div class="w3-blue w3-padding"><div class="container"><div class="row"><div class="col-sm-12"><h1>Lets Make A New Product</h1></div></div></div></div>
+    <div class="container">
     <div class="col-sm-4"></div>
    <div id="form" class="col-sm-4">
      <h3 class="w3-text-orange text-center"><?php echo $alert;?></h3>

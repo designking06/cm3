@@ -1,12 +1,11 @@
 <?php
-session_start();
 require_once('../require.php');
-$output3 = NULL;
 //comp.php
 ?>
 <html>
 <?php
 getHead();
+getHeader("creator");
 ?>
     <body class="w3-black">
     <div class="container text-center w3-padding w3-white" style="height:100%;">
@@ -15,26 +14,14 @@ getHead();
         </div>
         <div class="row w3-padding">
 
-            <a href="create.blog.php">
-                <div class="col-sm-4">
-                    <div class="" style="max-width:100px;max-height:100px;margin:auto;">
-                    <img src="images/pencil.png" class="w3-image"></div>
-                    <h3>Create Blog</h3>
-                </div>
-            </a>
-
             <a href="embed.video.php">
-                <div class="col-sm-4">
-                <div class="" style="max-width:100px;max-height:100px;margin:auto;">
-                    <img src="images/utube.png" class="w3-image"></div>
+                <div class="col-sm-12">
+                  <div class="" style="max-width:100px;max-height:100px;margin:auto;">
+
+                  </div>
                     <h3>Embed Youtube Video</h3>
                 </div>
             </a>
-                <div class="col-sm-4">
-                <div class="" style="max-width:100px;max-height:100px;margin:auto;">
-                    <img src="images/insta.png" class="w3-image"></div>
-                    <h3>Embed Insta Video</h3>
-                </div>
         </div>
         <div class="row w3-padding">
 
@@ -47,3 +34,4 @@ getHead();
             </a>
     </div>
     </body>
+<?php getFooter();?>

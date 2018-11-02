@@ -6,7 +6,7 @@ if(isset($_SESSION['compID'])){
 ?>
 <div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
   <!-- Navbar -->
-  <?php getHeader(); ?>
+  <?php getHeader("home"); ?>
   <!-- Navbar on small screens -->
   <!-- End Navbars -->
   <!-- Start Page Content -->
@@ -30,5 +30,5 @@ if(isset($_SESSION['compID'])){
       </header>
             <?php getusercompany($pdo,$uid);?>
     </div>
-    <?php getCrFooter();?>
+    <?php getFooter("merchant");?>
 </div>

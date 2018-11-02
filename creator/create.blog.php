@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
 <html>
 <body class="container-fluid w3-light-grey">
 
-<?php getHeader();?>
+<?php getHeader("creator");?>
 <div id="CompInfo">
 <div class="container w3-white" style="min-height:100%;">
 <div class="w3-padding" style="">

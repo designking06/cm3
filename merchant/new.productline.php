@@ -11,7 +11,7 @@ if(!isset($_GET['alert'])){
 }
 ?>
 <?php getHead(); ?>
-  <?php getHeader(); ?>
+  <?php getHeader("merchant"); ?>
   <!-- Page Content -->
         <div class="w3-margin">
             <div class="container">

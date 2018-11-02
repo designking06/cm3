@@ -145,7 +145,7 @@ if(isset($_POST['companyUpdate'])){
       }
 }
  ?>
-<?php getHeader();?>
+<?php getHeader("home");?>
 <h2>SETTINGS</h2>
 <p><?php echo $alert; ?>
 <h3><b>My Brand </b><button class="w3-btn w3-small" onclick="document.getElementById('brandSettings').style.display='block'">show</button></h3>

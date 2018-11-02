@@ -10,7 +10,7 @@ if(isset($_GET['compID'])){
 <!--Retrieve Head info -->
 <div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
   <!-- Navbar -->
-  <?php getHeader(); ?>
+  <?php getHeader("merchant"); ?>
   <!-- Navbar on small screens -->
   <!-- End Navbars -->
   <!-- Start Page Content -->

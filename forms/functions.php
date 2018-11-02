@@ -283,6 +283,7 @@ function getcustomers(PDO $pdo,$compID){
         <td class=""><?php echo $fname;?></td>
         <td class=""><?php echo $lname;?></td>
         <td class=""><?php echo $email;?></td>
+        <td class="">Edit/Update</td>
       </tr>
       <?php
     }

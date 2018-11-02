@@ -19,7 +19,7 @@ if(!isset($_GET['alert'])){
 }
 ?>
 <?php getHead(); ?>
-<?php getHeader(); ?>
+<?php getHeader("merchant"); ?>
   <!-- Page Content -->
 <div class="container text-center">
     <div id="addnew" class="w3-margin">

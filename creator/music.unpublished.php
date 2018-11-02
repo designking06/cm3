@@ -1,7 +1,7 @@
 <?php require_once('../require.php');?>
 <?php $output = NULL;?>
 <?php getHead();?>
-<?php getHeader();?>
+<?php getHeader("creator");?>
 <!-- Start Content -->
         <div class="row w3-border-bottom">
           <h1 class="w3-text-blue">Your Unpublished Album</h1>

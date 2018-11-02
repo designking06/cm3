@@ -54,13 +54,10 @@ if(isset($_POST['submitTask'])){
 </style>
 <!-- end head tags -->
 <body onload="" class="">
-<div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
-  <!-- Navbar -->
-  <?php getHeader(); ?>
-  <!-- Navbar on small screens -->
-  <!-- End Navbars -->
+<div id="" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
+    <?php getHeader("home"); ?>
   <!-- Start Page Content -->
-  <header class="" style="padding-top:40px;padding-bottom:30px;">
+  <header class="w3-margin" style="padding-top:;padding-bottom:;">
     <div class="container w3-white w3-card w3-padding">
           <div class="row text-center">
               <div class="col-sm-12"><img src="../media/images/ccaBlue.png" class="w3-image" style=""/></div>
@@ -79,7 +76,8 @@ if(isset($_POST['submitTask'])){
     </div>
   </header>
   <!-- Start Task List Container -->
-    <div id="tasks" class="container w3-white w3-card w3-padding">
+    <div id="tasks" class="w3-margin">
+      <div class="container w3-white w3-card w3-padding">
             <div class="" onclick="document.getElementById('taskContainer').style.display='block'">
               <h2>Task List</h2><hr class="w3-clear">
               <div class="row" style="width:100%;"><div class="col-sm-12"><h4>View, Edit and Add New Tasks to Complete</h4></div></div>
@@ -117,8 +115,8 @@ if(isset($_POST['submitTask'])){
               <!-- End ADD NEW Task List -->
               </div>
           </div>
+        </div>
     </div>
-    <hr>
   <!-- End Task List Container-->
   <div class="container w3-padding">
         <a href="merchant/dash.php">
@@ -148,4 +146,4 @@ if(isset($_POST['submitTask'])){
 <!--modals-->
 <!--modals-->
 </body>
-<?php getCrFooter(); ?>
+<?php getFooter("creator"); ?>
