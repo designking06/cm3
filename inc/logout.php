@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("location: /ccacms/CM3");
+header("location: https://cagency.net/CM3");
 ?>
