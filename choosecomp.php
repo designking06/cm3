@@ -4,9 +4,9 @@ if(isset($_SESSION['compID'])){
   unset($_SESSION['compID']);
 }
 ?>
-<div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
+<?php getHeader("home"); ?>
+<div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;height:70%;">
   <!-- Navbar -->
-  <?php getHeader("home"); ?>
   <!-- Navbar on small screens -->
   <!-- End Navbars -->
   <!-- Start Page Content -->
