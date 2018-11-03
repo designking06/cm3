@@ -40,7 +40,7 @@ function getHeader($cd){
           <a class="nav-link" href="dash.php?compID=<?php echo $compID;?>">Dashboard <span class="sr-only">(current)</span></a><!-- current directory dashboard-->
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Menu</a><!-- Bring back to creator/merchant option -->
+          <a class="nav-link" href="https://cagency.net/CM3/dash.php">Menu</a><!-- Bring back to creator/merchant option -->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,10 +51,10 @@ function getHeader($cd){
                 <?php
                 switch($cd){
                   case "home":{?>
-                    <p onclick="javascript:window.location.href='choosecomp.php'">Change Company</p>
-                    <p onclick="javascript:window.location.href='settings.php'">Settings</p>
+                    <p onclick="javascript:window.location.href='https://cagency.net/CM3/choosecomp.php'">Change Company</p>
+                    <p onclick="javascript:window.location.href='https://cagency.net/CM3/settings.php'">Settings</p>
                     <hr>
-                    <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
+                    <p class="w3-text-red" onclick="javascript:window.location.href='https://cagency.net/CM3/inc/logout.php'">Logout</p>
                     <?php
                     break;}
                   case "merchant":{
@@ -74,7 +74,7 @@ function getHeader($cd){
                     <p onclick="javascript:window.location.href='blog.php'">Blog</p>
                     <p onclick="javascript:window.location.href='create.music.php'">Music</p>
                     <hr>
-                    <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
+                    <p class="w3-text-red" onclick="javascript:window.location.href='https://cagency.net/CM3/inc/logout.php'">Logout</p>
                     <?php
                     break;}
                 } ?>
@@ -135,14 +135,14 @@ function getFooter(){
           <div class="col-sm-4">
             <h3>Manage:</h3>
             <div class="row">
-                <div class="col-sm-12"><a href="choosecomp.php">Change Company</a></div>
-                <div class="col-sm-12"><a href="settings.php">Settings</a></div>
+                <div class="col-sm-12"><a href="https://cagency.net/CM3/choosecomp.php">Change Company</a></div>
+                <div class="col-sm-12"><a href="https://cagency.net/CM3/settings.php">Settings</a></div>
               </div>
           </div>
           <div class="col-sm-4">
             <h3>Go To:</h3>
             <div class="row">
-                <div class="col-sm-12"><a href="admin.php#tasks">Tasks</a></div>
+                <div class="col-sm-12"><a href="https://cagency.net/CM3/dash.php#tasks">Tasks</a></div>
                 <div class="col-sm-12"><a href="concerns.php">Submit QCC</a></div>
               </div>
           </div>
