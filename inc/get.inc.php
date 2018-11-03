@@ -30,17 +30,14 @@ function getHeader($cd){
   global $compID;
   ?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">CM3</a>
+    <a class="navbar-brand" href="#"><p>CM3<br><span class="w3-hide-small">Assisted Management</span></p></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="dash.php?compID=<?php echo $compID;?>">Dashboard <span class="sr-only">(current)</span></a><!-- current directory dashboard-->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Menu</a><!-- Bring back to creator/merchant option -->
+          <a class="nav-link" href="https://cagency.net/dash.php?compID=<?php echo $compID;?>">Dashboard <span class="sr-only">(current)</span></a><!-- current directory dashboard-->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,6 +51,9 @@ function getHeader($cd){
                     <p onclick="javascript:window.location.href='choosecomp.php'">Change Company</p>
                     <p onclick="javascript:window.location.href='settings.php'">Settings</p>
                     <hr>
+                    <p class="w3-text-blue" onclick="javascript:window.location.href='https://cagency.net/CM3/creator'">CM3: Creator</p>
+                    <p class="w3-text-green" onclick="javascript:window.location.href='https://cagency.net/CM3/merchant'">CM3: Merchant</p>
+                    <hr>
                     <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
                     <?php
                     break;}
@@ -64,6 +64,8 @@ function getHeader($cd){
                     <p onclick="javascript:window.location.href='sales.php'">Sales/Expenses</p>
                     <p onclick="javascript:window.location.href='https://stripe.dashboard.com'">Stats</p>
                     <hr>
+                    <p class="w3-text-blue" onclick="javascript:window.location.href='https://cagency.net/CM3/creator'">Go to CM3: Creator</p>
+                    <hr>
                     <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
                     <?php
                     break;}
@@ -73,6 +75,8 @@ function getHeader($cd){
                     <p onclick="javascript:window.location.href='create.photo.php'">Photos</p>
                     <p onclick="javascript:window.location.href='blog.php'">Blog</p>
                     <p onclick="javascript:window.location.href='create.music.php'">Music</p>
+                    <hr>
+                    <p class="w3-text-green" onclick="javascript:window.location.href='https://cagency.net/CM3/merchant'">Go to CM3: Merchant</p>
                     <hr>
                     <p class="w3-text-red" onclick="javascript:window.location.href='inc/logout.php'">Logout</p>
                     <?php
