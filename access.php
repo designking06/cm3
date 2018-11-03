@@ -1,7 +1,7 @@
 <?php
 session_start();
 try{
-  $pdo = new PDO('mysql:host=127.0.0.1;dbname=ccacms','root','');
+  $pdo = new PDO('mysql:host=$host;dbname=$db','$uid','$pwd');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch(PDOException $e){
   echo $e->getMessage();
@@ -24,8 +24,10 @@ if(isset($_POST['loginSub'])){
         $_SESSION['uname'] = $user['uname'];
         $_SESSION['name'] = $user['fname']." ".$user['lname'];
         header("location:choosecomp.php");
+        exit;
     } else {
         $_SESSION['badpass'] = $_SESSION['badpass'] +1;
         header("location:index.php");
+        exit;
     }
 }
