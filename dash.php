@@ -44,11 +44,11 @@ if(isset($_POST['submitTask'])){
 <?php getHead(); ?>
 <style>
   #music{
-    background-image: url(../media/images/music.jpg);
+    background-image: url(https://cagency.net/media/images/music.jpg);
     background-position: right;
   }
   #blog{
-    background-image: url(../media/images/blog.jpg);
+    background-image: url(https://cagency.net/media/images/blog.jpg);
     background-position: left;
   }
 </style>
