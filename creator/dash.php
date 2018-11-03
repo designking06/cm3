@@ -30,7 +30,7 @@ require_once('../require.php');
   <header class="" style="padding-top:40px;padding-bottom:30px;">
     <div class="container w3-white w3-card w3-padding">
           <div class="row text-center">
-              <div class="col-sm-12"><img src="../media/images/ccaBlue.png" class="w3-image" style=""/></div>
+              <div class="col-sm-12"><img src="https://cagency.net/media/images/ccaBlue.png" class="w3-image" style=""/></div>
           </div>
           <!-- Welcome user & display general company information -->
           <div class="row text-center">
