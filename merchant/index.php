@@ -9,6 +9,9 @@ if(!isset($_SESSION['badpass'])){
     $submit = 'disabled';
   }
 }
+if(isset($_SESSION['uid'])){
+  header('location: dash.php');
+}
 if(isset($_POST['loginSub'])){
     $usuname = $_POST['uname'];
     $uspwd = $_POST['pwd'];

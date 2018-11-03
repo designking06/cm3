@@ -1,6 +1,5 @@
 <?php
-session_start();
-include_once('../inc/get.inc.php');
+require_once('../require.php');
 if(!isset($_SESSION['badpass'])){
   $_SESSION['badpass'] = (int)0;
   $submit = '';
@@ -9,6 +8,9 @@ if(!isset($_SESSION['badpass'])){
   if($_SESSION['badpass'] >= (int)5){
     $submit = 'disabled';
   }
+}
+if(isset($_SESSION['uid'])){
+  header('location: dash.php');
 }
 ?>
 <html>
