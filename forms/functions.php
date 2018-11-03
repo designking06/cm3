@@ -50,42 +50,22 @@ function siteLogo(PDO $pdo,$uid){
   }
   }
 //cm3 functions
-function newtask(PDO $pdo,$tn,$td,$uid,$ict,$dt){
-    if($ict == TRUE){
-      $ict = (int)1;
-            $compID = $_SESSION['compID'];
-      try{
-      $stmt = "INSERT INTO tasks (task,description,CompTask,compID,uid,dateSet) VALUES (?,?,?,?,?,?)";
-      $insert = $pdo->prepare($stmt)->execute([$tn,$td,$ict,$compID,$uid,$dt]);
-    if($insert){
-      echo "";
-    }else{
-      echo "sorry";
-    }
-    }catch(PDOException $e){
-      echo $e->getMessage();
-    }
-  }else{
-      $ict = (int)0;
-      try{
-      $stmt = "INSERT INTO tasks (task,description,CompTask,uid,dateSet) VALUES (?,?,?,?,?)";
-      $insert = $pdo->prepare($stmt)->execute([$tn,$td,$ict,$uid,$dt]);
-    if($insert){
-      echo "";
-    }else{
-      echo "An error occurred";
-    }
-    }catch(PDOException $e){
-      echo $e->getMessage();
-    }
-  }
+function newtask(PDO $pdo,$uid,$tn,$td,$ict,$compID,$dd,$ds){
+      $stmt = "INSERT INTO tasks (task,description,CompTask,CompID,uid,dateDue,dateSet) VALUES (?,?,?,?,?,?,?)";
+      $insert = $pdo->prepare($stmt);
+      if($insert->execute([$tn,$td,$ict,$compID,$uid,$dd,$ds])){
+        return TRUE;
+      }else{
+        return FALSE;
+      }
 }
-function deletetask(PDO $pdo,$taskID,$page){
+function deletetask(PDO $pdo,$taskID){
   $stmt = "DELETE FROM tasks WHERE id = ?";
   $delete = $pdo->prepare($stmt);
-  $delete->execute([$taskID]);
-  if($delete){
-    header("location: $page");
+  if($delete->execute([$taskID])){
+    return TRUE;
+  }else{
+    return FALSE;
   }
 }
 function selectTask(PDO $pdo,$compID){
@@ -121,10 +101,8 @@ function selectTask(PDO $pdo,$compID){
      echo $e->getMessage();
     }
 }
-
 //merchant functions
 function loginuserMerchant(PDO $pdo,$usuname,$uspwd){
-
     $stmt = $pdo->prepare("SELECT * FROM users WHERE uname = ? && merchant = ?");
     $stmt->execute([$usuname,1]);
     $user = $stmt->fetch();

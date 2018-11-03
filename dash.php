@@ -12,30 +12,21 @@ if(!isset($_GET['compID'])){
 if(isset($_POST['deleteTask'])){
   $taskID = $_POST['taskID'];
   $page = $_POST['page'];
-  $stmt = "DELETE FROM tasks WHERE id = ?";
-  $delete = $pdo->prepare($stmt);
-  $delete->execute([$taskID]);
-  if($delete){
-    header("location: $page");
+  if(deletetask($pdo,$taskID,$page)){
+    $alertTask = "Task deleted.";
+  }else{
+    $alertTask = "There was an issue deleting your task.";
   }
 }
 if(isset($_POST['submitTask'])){
-    $p1 = $_POST['task'];
-    $p2 = $_POST['description'];
-    $p3 = $_SESSION['uid'];
-    $p4 = date('Y-m-d');
-    $compTask = (int)0;
-    try{
-    $stmt = "INSERT INTO tasks (task,description,companyTask,uid,dateSet) VALUES (?,?,?,?)";
-    $insert = $pdo->prepare($stmt)->execute([$p1,$p2,$compTask,$p3,$p4]);
-  if($insert){
-    echo "Nice Job";
-  }else{
-    echo "sorry". $mysqli->error;
-  }
-  }catch(PDOException $e){
-    echo $e->getMessage();
-  }
+    $tn = $_POST['task'];
+    $td = $_POST['description'];
+    $ds = date('Y-m-d');
+    $dd = $_POST['dueDate'];
+    $ict = (int)0;
+    if(newtask($pdo,$uid,$tn,$td,$ict,$_SESSION['compID'],$dd,$ds)){
+      $alertTask = "New Task Added.";
+    }
 }
  ?>
 <?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>
@@ -81,6 +72,11 @@ if(isset($_POST['submitTask'])){
             <div class="" onclick="document.getElementById('taskContainer').style.display='block'">
               <h2>Task List</h2><hr class="w3-clear">
               <div class="row" style="width:100%;"><div class="col-sm-12"><h4>View, Edit and Add New Tasks to Complete</h4></div></div>
+              <div class="row" style="width:100%;">
+                <div class="col-sm-12">
+                  <p><?php if(isset($alertTask)){echo $alertTask;}?></p>
+                </div>
+              </div>
             </div>
             <div id="taskContainer" style="display:none;">
               <div class="col-sm-12 text-right"><button class="btn-primary" onclick="document.getElementById('taskContainer').style.display='none';">Hide Tasks</button></div>

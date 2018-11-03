@@ -1,9 +1,6 @@
 <?php
-session_start();
-require 'inc/db.inc.php';
-require 'inc/var.inc.php';
+require_once('../require.php');
 $output = NULL;
-
 if(!isset($_SESSION['loggedin'])){
         header("Location: login.php");
     }elseif(!isset($_SESSION["CompID"])){
@@ -78,4 +75,4 @@ $output = "Website button error";
 
 <div class="col-sm-12 text-center"><a href="http://<?php echo $CompSite;?>"><h1>VIEW WEBSITE</h1></a></div></div>
 </div>
-</body> 
+</body>

@@ -1,22 +1,6 @@
 <?php
 require_once('inc/merchant.required.php');
 //set page
-$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-?>
-<?php
-if(isset($_POST['deleteTask'])){
-  $taskID = $_POST['taskID'];
-  $page = $_POST['page'];
-  $deletetask($pdo,$taskID,$page);
-}
-if(isset($_POST['submitTask'])){
-    $tn = $_POST['task'];
-    $td = $_POST['description'];
-    $uid = $_SESSION['uid'];
-    $dt = date('Y-m-d');
-    $ict = $_POST['compTask'];
-    newtask($pdo,$tn,$td,$uid,$ict,$dt);
-}
 ?>
 <!--Retrieve Head info -->
 <div id="body" class="w3-light-grey" style="max-width:100%;padding-bottom: 20px;">
@@ -61,6 +45,11 @@ if(isset($_POST['submitTask'])){
               <div class="" onclick="document.getElementById('taskContainer').style.display='block'">
                 <h2>Task List</h2><hr class="w3-clear">
                 <div class="row" style="width:100%;"><div class="col-sm-12"><h4>View, Edit and Add New Tasks to Complete</h4></div></div>
+                <div class="row" style="width:100%;">
+                  <div class="col-sm-12">
+                    <p><?php if(isset($alertTask)){echo $alertTask;}?></p>
+                  </div>
+                </div>
               </div>
               <div id="taskContainer" style="display:none;">
                 <div class="col-sm-12 text-right"><button class="btn-primary" onclick="document.getElementById('taskContainer').style.display='none';">Hide Tasks</button></div>
@@ -72,26 +61,10 @@ if(isset($_POST['submitTask'])){
                 </div>
                 <div id="addNew" class="" style="padding:0 20 15 20;"><hr class="w3-clear">
                      <div class="row" style="width:100%;">
-                       <div class="text-center" style="width:70%;margin:auto;"><h2>Add New Task</h2></div>
+                       <div class="text-center" style="width:70%;margin:auto;">
+                         <a href="https://cagency.net/CM3/dash.php#tasks"><h2>Add New Task</h2></a></div>
                      </div>
                 <!-- This is where the PHP Functionality will go to retrieve information from the Tasks table and display them. -->
-                    <div class="row">
-                        <div class="text-center" style="max-width:60%;margin:auto;">
-                            <form method="post" action="<?php $_SERVER['PHP_SELF'];?>">
-                              Name of Task:<br>
-                              <input type="text" name="task" class="form-control">
-                              <br><br>
-                              Description:<br>
-                              <textarea name="description" class="form-control" placeholder="Optional Description for your task"></textarea>
-                              <br>
-                              Due Date:<br>
-                              <input type="date" class="form-control" name="dueDate">
-                              <input type="hidden" name="page" value="<?php echo $actual_link;?>">
-                              <input type="hidden" name="userID" value="<?php echo $uid; ?>">
-                              <input class="w3-btn w3-green" type="submit" name="submitTask" value="Submit Task">
-                            </form>
-                        </div>
-                    </div>
                 <!-- End ADD NEW Task List -->
                 </div>
             </div>

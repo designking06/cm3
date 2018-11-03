@@ -1,6 +1,12 @@
 <?php
+session_start();
 require_once('pdo.php');
-$uid = $_SESSION['uid'];
+if(isset($_SESSION['uid'])){
+  $uid = $_SESSION['uid'];
+}else{
+  header('location: https://cagency.net/CM3');
+  exit;
+}
 if(!empty($uid)){
     $stmt = $pdo->prepare("SELECT * FROM users WHERE uid = ?");
     $stmt->execute([$uid]);

@@ -23,11 +23,11 @@ if(isset($_POST['loginSub'])){
         $_SESSION['pwd'] = "valid";
         $_SESSION['uname'] = $user['uname'];
         $_SESSION['name'] = $user['fname']." ".$user['lname'];
-        header("location:choosecomp.php");
+        header("location:https://cagency.net/CM3/choosecomp.php");
         exit;
     } else {
         $_SESSION['badpass'] = $_SESSION['badpass'] +1;
-        header("location:index.php");
+        header("location:https://cagency.net/CM3/index.php");
         exit;
     }
 }
