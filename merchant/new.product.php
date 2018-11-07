@@ -1,4 +1,9 @@
-<?php require_once('inc/merchant.required.php'); ?>
+<?php require_once('inc/merchant.required.php');
+if(!isset($_SESSION['uid'])){
+  session_destroy();
+  header('location:index.php');
+  exit;
+} ?>
 <?php $alert = '';?>
 <?php
 if(isset($_POST['newProduct'])){
@@ -28,16 +33,30 @@ if(isset($_POST['newProduct'])){
     //use switch statement for created/chosen product line name
     switch($plstatus){
         case "created":{
-                newProductLine($pdo,$pLN,$compID,$uid);
-                if($GLOBALS['insert']){
-                    //new product line made, grab new product line id, get last affected row
-                    $pLID = $pdo->lastInsertId();
-                    //unfinished, insert new id with form info
-                        newProduct($pdo,$pn,$pp,$pi,$pd,$pLID,$compID,$uid);
-                        $alert .= "Successfully created product".$pn."<br>";
-                  }else{
-                    //product line not Inserted, alert then insert info into product table with product line name
-                    $alert = "An error occurred. [n.p.42]";
+                  switch(newProductLine($pdo,$pLN,$compID,$uid)){
+                    case "createdLine":{
+                          $pLID = $pdo->lastInsertId();
+                        if(newProduct($pdo,$pn,$pp,$pi,$pd,$GLOBALS['pLID'],$compID,$uid)){
+                          $alert = "Successfully created product ".$pn."<br>";
+                        }else{
+                          $alert = "An error occurred n.p.[c]";
+                        }
+                          break;}
+                    case "failed":{
+                          $alert = "an error occurred n.p.[f]";
+                          break;}
+                    case "grabbed":{
+                          getProductLineIdByName($pdo,$pLN);
+                          if($GLOBALS['status']){
+                              $pLID = $GLOBALS['pLID'];
+                              newProduct($pdo,$pn,$pp,$pi,$pd,$pLID,$compID,$uid);
+                              unset($GLOBALS['pLID']);
+                              $alert = "Successfully created product ".$pn;
+                          }else{
+                             echo "An error occurred [451]";
+                          }
+                          unset($GLOBALS['status']);
+                          break;}
                   }
             unset($GLOBALS['insert']);
             break;
@@ -48,7 +67,7 @@ if(isset($_POST['newProduct'])){
                 $pLID = $GLOBALS['pLID'];
                 newProduct($pdo,$pn,$pp,$pi,$pd,$pLID,$compID,$uid);
                 unset($GLOBALS['pLID']);
-                $alert .= "Successfully created product".$pn;
+                $alert .= "Existing: [65] Successfully created product".$pn;
             }else{
                echo "An error occurred [455]";
             }
@@ -107,7 +126,7 @@ if(isset($_POST['newProduct'])){
    <textarea class="form-control" name="productDescription" placeholder="This Field May be left blank for now."></textarea>
    <h5 class="w3-text-blue">Price of Product (USD)<h5>
     <input class="form-control" type="number" required name="productPrice" step=".01" value="1.00"><br>
-    <input type="submit" name="newProduct" value="Add" class="form-control">
+    <?php if($_SESSION['permissions']['merchant']){?><input type="submit" name="newProduct" value="Add" class="form-control"><?php }?>
   </form>
  </div>
  <div class="col-sm-4"></div>

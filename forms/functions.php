@@ -2,9 +2,10 @@
 //functions
 
 //user & company functions
-function getusercompany(PDO $pdo,$uid){
+function getusercompany(PDO $pdo,$uid,$pa){
         ?>
-        <div class="container w3-card w3-white">
+        <div class="w3-padding">
+        <div class="container w3-card w3-white w3-padding">
             <div class="row">
                 <div class="col-sm-12 text-center"><h2>Choose Your Company</h2></div>
                 <div class="col-sm-12 text-center">
@@ -15,16 +16,31 @@ function getusercompany(PDO $pdo,$uid){
                 foreach($stmt as $comp){
                   ?>
                     <div id="<?php echo $comp['CompID'];?>">
-                           <a href="dash.php?compID=<?php echo $comp['CompID'];?>"><div class="w3-margin w3-padding">
-                             <h4 class="w3-text-lightgrey"><?php echo $comp['CompName'];?></h4>
+                           <a href="dash.php?compID=<?php echo $comp['CompID'];?>">
+                             <div class="w3-margin w3-padding">
+                               <h4 class="w3-text-lightgrey"><?php echo $comp['CompName'];?></h4>
                            </div>
                         </a>
                     </div><hr>
                 <?php }?>
               </div>
-            </div>
-              <div class="row"><div class="col-sm-12  text-center">Add New Company</div></div>
-            </div>
+                <div class="col-sm-12 text-center">
+                  <button id="controller" class="btn btn-primary">Add New Company</button>
+                </div>
+              </div>
+              <?php if($_SESSION['admin']){?>
+                <hr>
+                <div class="container">
+                  <div class="w3-padding">
+                    <div class="row">
+                      <div class="col-sm-12 text-center">
+                        <button class="btn btn-primary">Admin Panel</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <?php }?>
+    </div></div>
 <?php }
 function getusercompanyinfo(PDO $pdo,$compID){
         //grab company info
@@ -35,6 +51,15 @@ function getusercompanyinfo(PDO $pdo,$compID){
             $_SESSION['compname'] = $comp['CompName'];
             echo "Managing: ".$_SESSION['compname'];
         }
+}
+function getCompWebsite(PDO $pdo,$compID){
+        //grab company info
+        $stmt = "SELECT * FROM companies WHERE CompID = ?";
+        $select = $pdo->prepare($stmt);
+        $select->execute([$compID]);
+        foreach($select as $comp){ ?>
+          <a href="<?php echo $comp['CompWebsite'];?>"><h1>View Website</h1></a>
+      <?php  }
 }
 function siteLogo(PDO $pdo,$uid){
   $stmt = "SELECT CompLogo FROM companies WHERE UserID = ? LIMIT 1";
@@ -127,43 +152,55 @@ function loginuserMerchant(PDO $pdo,$usuname,$uspwd){
 function newProduct(PDO $pdo,$pn,$pp,$pi,$pd,$pLID,$compID,$uid){
         $stmt = "INSERT INTO products (ProductName,ProductPrice,ProductImage,ProductDescription,ProductLineID,CompID,uid) VALUES(?,?,?,?,?,?,?)";
         $insert = $pdo->prepare($stmt);
-        $insert->execute([$pn,$pp,$pi,$pd,$pLID,$compID,$uid]);
-         if($insert){//new product upload successful
-           $alert = "Successfully created product".$pn."<br>";
+         if($insert->execute([$pn,$pp,$pi,$pd,$pLID,$compID,$uid])){//new product upload successful
+           $alert = "Successfully created product ".$pn."<br>";
            //insert product image to directory
                 $target_dir = "../../media/images/";
                 $target_file = $target_dir . basename($pi);
                if(move_uploaded_file($_FILES["productImage"]["tmp_name"], $target_file)){
-                 $alert = 'Image Successfully uploaded';
+                 $alert .= 'Image Successfully uploaded';
+                 return TRUE;
                }else{
-                 $alert= "Image upload unsuccessful.";
+                 $alert .= "Image upload unsuccessful.";
+                 return FALSE;
                }
          }else{
            //unsuccessful
-           $alert = "Hm.. Something went wrong";
+           return FALSE;
          }
          ;
 
 }
 function newProductLine(PDO $pdo,$pLN,$compID,$uid){
-      $stmt = "SELECT * FROM productlines WHERE ProductLineName = ?";
-      $select = $pdo->prepare($stmt);
-      $select->execute([$pLN]);
-      $count = $select->rowCount();
-      if($count = 0){
-      $stmt = "INSERT INTO productlines (ProductLineName,CompID,uid) VALUES(?,?,?)";
-      $insert = $pdo->prepare($stmt);
-      $insert->execute([$pLN,$compID,$uid]);
-      $GLOBALS['insert'] = TRUE;
-      $alert = "Successfully created productline".$pLN."<br>";
-      ;
-    }else{
+        $stmt = "SELECT * FROM productlines WHERE ProductLineName = ?";
+        $select = $pdo->prepare($stmt);
+        $select->execute([$pLN]);
+        $count = $select->rowCount();
+      if($count == 0){
+        $stmt = "INSERT INTO productlines (ProductLineName,CompID,uid) VALUES(?,?,?)";
+        $insert = $pdo->prepare($stmt);
+        if($insert->execute([$pLN,$compID,$uid])){
+          $alert = "Product line created. <br>";
+          //grab last insert
+          $status = "createdLine";
+          $GLOBALS['pLID'] = $pdo->lastInsertId();
+          return $status;
+        }else{
+          $alert = "Product line creation failed. <br>";
+          $status = "failed";
+          return $status;
+        }
+      }
+      if($count > 0){
       //product line already exists
      //do nothing, continue
-     $alert = "Product Line was not created successfully created <br>";
+     $alert = "Product line already existed. <br>";
+     //get product line id
+     $status = "grabbed";
+     getProductLineIdByName($pdo,$pLN);
+      return $status;
     }
 }
-
 //display
 function getProductLineIdByName(PDO $pdo,$pLN){
 
@@ -286,7 +323,6 @@ function grabcustomerIDwithEmail(PDO $pdo,$email){
     //no customer found with that email
   }
 }
-
 //sales
 function insertneworder(PDO $pdo,$compID,$custid,$custemail,$notes,$date){
   $stmt = "INSERT INTO sales (CompID,customerid,customeremail,ordernotes,orderdate) VALUES(?,?,?,?,?)";
@@ -365,35 +401,34 @@ function brandForm(PDO $pdo,$uid){
           $snap = $row['snapchat'];
           $twitter = $row['twitter'];
           echo '
-            <div id="stageName" class="input-group">
-            Stage Name<br>
+            <div id="stageName" class="">Stage Name<br>
             <input class="form-control" type="text" name="stageName" value="'.$stageName.'">
             </div>
-            <div id="bio" class="input-group">
+            <div id="bio" class="">
             Bio<br>
             <textarea class="form-control" type="text" name="bio">'.$bio.'</textarea><br>
             </div>
-            <div id="youtube" class="input-group">
+            <div id="youtube" class="">
             Youtube:<br>
             <input type="text" name="youtube" class="form-control" value="'.$youtube.'"><br>
             </div>
-            <div id="soundcloud" class="input-group">
+            <div id="soundcloud" class="">
               Soundcloud:<br>
               <input type="text" name="soundcloud" class="form-control" value="'.$soundcloud.'"><br>
             </div>
-            <div id="instagram" class="input-group">
+            <div id="instagram" class="">
               Instagram:<br>
               <input type="text" name="instagram" class="form-control" value="'.$instagram.'"><br>
             </div>
-            <div id="snapchat" class="input-group">
+            <div id="snapchat" class"">
               snapchat:<br>
               <input type="text" name="snapchat" class="form-control" value="'.$snap.'"><br>
             </div>
-            <div id="twitter" class="input-group">
+            <div id="twitter" class="">
               Twitter:<br>
               <input type="text" name="twitter" class="form-control" value="'.$twitter.'"><br>
             </div>
-            <div id="soundcloud" class="input-group">
+            <div id="soundcloud" class="">
               <input type="hidden" name="uid" value="'.$uid.'">
               <input type="submit" name="brandUpdate" value="Update Brand" class="form-control">
             </div>
@@ -451,7 +486,7 @@ function contactForm(PDO $pdo,$uid){
       <input class="form-control" type="text" name="email" value="'.$email.'"><br>
       phone number<br>
       <input class="form-control" type="text" name="phone" value="'.$phone.'"><br>
-      <div id="soundcloud" class="input-group">
+      <div id="" class="input-group">
       <input type="hidden" name="uid" value="'.$uid.'">
       <input class="form-control" type="submit" name="contactUpdate" value="Update Contact">
       </div>

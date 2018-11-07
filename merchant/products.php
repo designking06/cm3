@@ -1,4 +1,9 @@
-<?php require_once('inc/merchant.required.php'); ?>
+<?php require_once('inc/merchant.required.php');
+if(!isset($_SESSION['uid'])){
+  session_destroy();
+  header('location:index.php');
+  exit;
+} ?>
 
 <?php
 if(isset($_GET['updatedproduct'])){
@@ -38,6 +43,7 @@ if(!isset($_GET['alert'])){
                 <?php echo $alert;?>
           <!-- Count and list number of how many products user has -->
           <?php
+          if($_SESSION['permissions']['merchant']){
           //select * from products where user id
           $stmtSPL = "SELECT * FROM productlines WHERE CompID = ?";
           $selectPL= $pdo->prepare($stmtSPL);
@@ -83,7 +89,7 @@ if(!isset($_GET['alert'])){
                             <div class="w3-text-blue w3-small btn" onclick="document.getElementById('editNum<?php echo $id;?>').style.display='block'">EDIT</div>
                         </div>
                            <!-- Display Product Image -->
-                        <div class="row w3-dark-grey"><img src="../media/images/<?php echo $image;?>" class="w3-image w3-padding" style="height:50px;"></div>
+                        <div class="row w3-dark-grey"><img src="https://cagency.net/media/images/<?php echo $image;?>" class="w3-image w3-padding" style="height:50px;"></div>
                            <!-- Display Product Price -->
                           <div class="row w3-padding"><strong><span class="w3-text-green">$<?php echo $price;?></span></strong></div>
                       </div>
@@ -125,6 +131,7 @@ if(!isset($_GET['alert'])){
               }
             }
           }
+        }
           ?>
           <!-- Provide a form for users to add new products -->
   </div>

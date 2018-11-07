@@ -4,7 +4,9 @@ require_once('pdo.php');
 if(isset($_SESSION['uid'])){
   $uid = $_SESSION['uid'];
 }else{
-  header('location: https://cagency.net/CM3');
+  session_destroy();
+  $alert = "You must be a member and log in to enjoy Crawley Creative Agency's Creative Management Suite, CM3.";
+  header("location:cagency.net/CM3/index.php?alert=".$alert);
   exit;
 }
 if(!empty($uid)){
@@ -18,9 +20,9 @@ if(!empty($uid)){
       //valid
       $permission = $row['permissions'];
       if($permission != 'AA'){
-        $_SESSION['admin'] = (bool)0;
+        $_SESSION['admin'] = FALSE;
       }else{
-        $_SESSION['admin'] = (bool)1;
+        $_SESSION['admin'] = TRUE;
       }
       $permission = $row['creator'];
       if($permission != 1){
@@ -32,11 +34,13 @@ if(!empty($uid)){
   } else {
         session_destroy();
         $_SESSION['badpass'] = $_SESSION['badpass'] +1;
-        header("location:index.php");
+        $alert = "Username/Password combination not found or not valid CM3 credentials.";
+        header("location:cagency.net/CM3/index.php?alert=".$alert);
         exit;
     }
 }else{
   session_destroy();
-  header("location:index.php");
+  $alert = "You must be a member and log in to enjoy Crawley Creative Agency's Creative Management Suite, CM3.";
+  header("location:cagency.net/CM3/index.php?alert=".$alert);
   exit;
 }

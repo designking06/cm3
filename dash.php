@@ -32,7 +32,6 @@ if(isset($_POST['submitTask'])){
 <?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>
 <html>
 <!--Retrieve Head info -->
-<?php getHead(); ?>
 <style>
   #music{
     background-image: url(https://cagency.net/media/images/music.jpg);
@@ -115,15 +114,25 @@ if(isset($_POST['submitTask'])){
     </div>
   <!-- End Task List Container-->
   <div class="container w3-padding">
-        <a href="merchant/dash.php">
+    <?php if(!isset($_SESSION['compID'])){ ?>
+            <a href="explorecm3.php">
+            <?php }else{ ?>
+            <a href="merchant/dash.php">
+            <?php  } ?>
             <div id="" class="w3-display-container w3-green" style="width:100%;height:280px;">
             <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">MERCHANT</h1>
             </div>
       </a>
         <hr class="w3-clear">
-      <a href="creator/dash.php"><div id="music" class=" w3-display-container w3-sepia w3-grayscale" style="width:100%;height:280px;">
-        <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">CREATOR</h1>
-      </div></a>
+    <?php if(!isset($_SESSION['compID'])){ ?>
+            <a href="explorecm3.php">
+            <?php }else{ ?>
+            <a href="creator/dash.php">
+            <?php  } ?>
+        <div id="music" class=" w3-display-container w3-sepia w3-grayscale" style="width:100%;height:280px;">
+          <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">CREATOR</h1>
+        </div>
+      </a>
       <hr class="w3-clear">
       <a href=""><div id="blog" class="w3-display-container w3-grayscale" style="width:100%;height:280px;">
         <h1 class="w3-text-white w3-display-middle w3-xxxlarge" style="">WEB</h1>
@@ -135,7 +144,9 @@ if(isset($_POST['submitTask'])){
     <a href="concerns.php"><div class="col-sm-12 text-center"><h2>Questions, Comments, Concerns?</h2></div></a>
   </div>
   <div class="row">
-    <div class="col-sm-12 text-center"><a href="../index.php"><h1>VIEW WEBSITE</h1></a></div>
+    <div class="col-sm-12 text-center">
+      <?php getCompWebsite($pdo,$_SESSION['compID']);?>
+    </div>
   </div>
 </div>
 </div>
@@ -143,3 +154,7 @@ if(isset($_POST['submitTask'])){
 <!--modals-->
 </body>
 <?php getFooter("creator"); ?>
+<?php
+//if user does not have company registered, replace page links with explore?view= merchant/creator
+//<a href="explorecm3.php?view=merchant"><a href="explorecm3.php?view=creator"><a href="explorecm3.php?view=web">
+?>

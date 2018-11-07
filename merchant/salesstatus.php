@@ -1,5 +1,10 @@
 <?php
 require 'inc/merchant.required.php';
+if(!isset($_SESSION['uid'])){
+  session_destroy();
+  header('location:index.php');
+  exit;
+}
 //set page
 $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 if(isset($_GET['compID'])){
@@ -62,7 +67,8 @@ if(isset($_GET['compID'])){
               </p>
             </div>
           <div class="row">
-            <div class="col-sm-12"><button class="btn btn-primary" onclick="window.location.href='sales.php';">Create New Sale</button></div>
+            <div class="col-sm-4"><button class="btn btn-primary" onclick="window.location.href='new.sale.php';">Create New Sale</button></div>
+            <div class="col-sm-4"><button class="btn btn-primary" onclick="window.location.href='sales.php';">View Sales and Customers</button></div>
           </div>
         </div>
 

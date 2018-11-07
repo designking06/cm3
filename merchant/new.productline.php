@@ -1,4 +1,9 @@
-<?php require_once('inc/merchant.required.php'); ?>
+<?php require_once('inc/merchant.required.php');
+if(!isset($_SESSION['uid'])){
+  session_destroy();
+  header('location:index.php');
+  exit;
+} ?>
 <?php
 if(!isset($_GET['alert'])){
     $alert = '';

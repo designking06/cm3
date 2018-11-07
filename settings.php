@@ -57,10 +57,9 @@ if(isset($_POST['contactUpdate'])){
     if($count > 0){
       $email = $_POST['email'];
       $phone = $_POST['phone'];
-      $address = $_POST['address'];
       //user has info inside table, update info
-      $sql = "UPDATE users SET email = ?, phone = ?,address = ? WHERE uid = ?";
-      $update = $pdo->prepare($sql)->execute([$email,$phone,$address,(int)$uid]);
+      $sql = "UPDATE users SET email = ?, phone = ? WHERE uid = ?";
+      $update = $pdo->prepare($sql)->execute([$email,$phone,(int)$uid]);
     if($update){
       $alert = 'successful updated entry';
     }else{
@@ -146,43 +145,44 @@ if(isset($_POST['companyUpdate'])){
 }
  ?>
 <?php getHeader("home");?>
-<h2>SETTINGS</h2>
-<p><?php echo $alert; ?>
-<h3><b>My Brand </b><button class="w3-btn w3-small" onclick="document.getElementById('brandSettings').style.display='block'">show</button></h3>
-<p class="w3-small">stage name, bio, social media pages, logo</p>
-<div id="brandSettings" style="display:none">
-    <button class="w3-btn w3-red w3-small" onclick="document.getElementById('brandSettings').style.display='none'">hide</button><br><br>
-      <div id="logo" class="input-group">
-        Logo:<br>
-        <input type="file" name="logo" class="form-control" value="<?php //echo $logo;?>"><br>
-      </div>
-<form id="brandForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-<?php  brandForm($pdo,$uid); ?>
-</form>
-</div>
-<h3><b>General Info</b> <button class="w3-btn w3-small" onclick="document.getElementById('generalSettings').style.display='block'">show</button></h3>
-<p class="w3-small">username, name, gender, city of origin</p>
-<div id="generalSettings" class="container" style="display:none;">
-  <button class="w3-btn w3-red w3-small" onclick="document.getElementById('generalSettings').style.display='none'">hide</button><br><br>
-  <form method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
-  <?php generalForm($pdo,$uid);?>
-  </form>
-</div>
-<h3><b>Contact Info </b><button class="w3-btn w3-small" onclick="document.getElementById('contactSettings').style.display='block'">show</button></h3>
-<p class="w3-small">email, phone number, address</p>
-<div id="contactSettings" style="display:none">
-    <button class="w3-btn w3-red w3-small" onclick="document.getElementById('contactSettings').style.display='none'">hide</button><br><br>
-    <form id="contactForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-    <?php contactForm($pdo,$uid); ?>
+<div class="container">
+  <div class="row"><div class="col-sm-12 text-center"><h1 class="display-3 w3-text-red">SETTINGS</h1></div></div>
+  <p><?php echo $alert; ?>
+  <h3><b>My Brand </b><button class="w3-btn w3-small" onclick="document.getElementById('brandSettings').style.display='block'">show</button></h3>
+  <p class="w3-small">stage name, bio, social media pages, logo</p>
+  <div id="brandSettings" style="display:none">
+      <button class="w3-btn w3-red w3-small" onclick="document.getElementById('brandSettings').style.display='none'">hide</button><br><br>
+        <div id="logo" class="input-group">
+          Logo:<br>
+          <input type="file" name="logo" class="form-control" value="<?php //echo $logo;?>"><br>
+        </div>
+        <form id="brandForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+        <?php  brandForm($pdo,$uid); ?>
+        </form>
+  </div>
+  <h3><b>General Info</b> <button class="w3-btn w3-small" onclick="document.getElementById('generalSettings').style.display='block'">show</button></h3>
+  <p class="w3-small">username, name, gender, city of origin</p>
+  <div id="generalSettings" class="container" style="display:none;">
+    <button class="w3-btn w3-red w3-small" onclick="document.getElementById('generalSettings').style.display='none'">hide</button><br><br>
+    <form method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
+    <?php generalForm($pdo,$uid);?>
     </form>
-</div>
-<h3><b>Company Info </b><button class="w3-btn w3-small" onclick="document.getElementById('companySettings').style.display='block'">show</button></h3>
-<p class="w3-small">name, address, email, phone number</p>
-<div id="companySettings" style="display:none">
-    <button class="w3-btn w3-red w3-small" onclick="document.getElementById('companySettings').style.display='none'">hide</button><br><br>
-    <form id="companyForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="w3-form" style="max-width:300px;">
-    <?php companyForm($pdo,$uid); ?>
-    </form>
-</div>
+  </div>
+  <h3><b>Contact Info </b><button class="w3-btn w3-small" onclick="document.getElementById('contactSettings').style.display='block'">show</button></h3>
+  <p class="w3-small">email, phone number, address</p>
+  <div id="contactSettings" style="display:none">
+      <button class="w3-btn w3-red w3-small" onclick="document.getElementById('contactSettings').style.display='none'">hide</button><br><br>
+      <form id="contactForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+      <?php contactForm($pdo,$uid); ?>
+      </form>
+  </div>
+  <h3><b>Company Info </b><button class="w3-btn w3-small" onclick="document.getElementById('companySettings').style.display='block'">show</button></h3>
+  <p class="w3-small">name, address, email, phone number</p>
+  <div id="companySettings" style="display:none">
+      <button class="w3-btn w3-red w3-small" onclick="document.getElementById('companySettings').style.display='none'">hide</button><br><br>
+      <form id="companyForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="w3-form" style="max-width:300px;">
+      <?php companyForm($pdo,$uid); ?>
+      </form>
+  </div>
 </div>
 <?php getCrFooter();?>
